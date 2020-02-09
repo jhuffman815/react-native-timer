@@ -81,6 +81,8 @@ export default class App extends React.Component {
     state = {
         remainingSeconds: 5,
         isRunning: false,
+        selectedMinutes: "0",
+        selectedSeconds: "5"
     };
 
     interval = null;
@@ -99,7 +101,9 @@ export default class App extends React.Component {
 
     start = () => {
         this.setState(state => ({
-            remainingSeconds: state.remainingSeconds - 1,
+            remainingSeconds: 
+                parseInt(state.selectedMinutes, 10) * 60 + 
+                parseInt(state.selectedSeconds, 10),
             isRunning: true,
         }));
         
@@ -127,9 +131,10 @@ export default class App extends React.Component {
                 <Picker
                 style={styles.picker}
                 itemStyle={styles.pickerItem}
-                selectedValue="5"
+                selectedValue={this.state.selectedMinutes}
                 onValueChange={itemValue => {
                     //update the state
+                    this.setState({ selectedMinutes: itemValue })
                 }}
             >
                 {AVAILABLE_MINUTES.map(value => (
@@ -140,9 +145,10 @@ export default class App extends React.Component {
                 <Picker
                 style={styles.picker}
                 itemStyle={styles.pickerItem}
-                selectedValue="5"
+                selectedValue={this.state.selectedSeconds}
                 onValueChange={itemValue => {
                     //update the state
+                    this.setState({ selectedSeconds: itemValue })
                 }}
                 >
                 {AVAILABLE_SECONDS.map(value => (
