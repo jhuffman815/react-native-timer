@@ -49,6 +49,10 @@ const styles = StyleSheet.create({
     pickerItem: {
         color: "#fff",
         fontSize: 20,
+    },
+    pickerContainer: {
+        flexDirection: "row",
+        alignItems: "center"
     }
   });
 
@@ -59,7 +63,20 @@ const styles = StyleSheet.create({
       const seconds = time - minutes * 60;
       return { minutes: formatNumber(minutes), seconds: formatNumber(seconds) };
   };
+
+  const createArray = length => {
+      const arr = [];
+      let i = 0;
+      while (i < length) {
+          arr.push(i.toString());
+          i += 1;
+      }
+
+      return arr;
+  }
   
+  const AVAILABLE_MINUTES = createArray(10);
+  const AVAILABLE_SECONDS = createArray(60);
 export default class App extends React.Component {
     state = {
         remainingSeconds: 5,
@@ -106,7 +123,7 @@ export default class App extends React.Component {
 
     renderPickers = () => {
         return (
-            <View>
+            <View style={styles.pickerContainer}>
                 <Picker
                 style={styles.picker}
                 itemStyle={styles.pickerItem}
@@ -115,12 +132,25 @@ export default class App extends React.Component {
                     //update the state
                 }}
             >
-                <Picker.Item key="1" label="1" value="1" /> 
-                <Picker.Item key="2" label="2" value="2" /> 
-                <Picker.Item key="3" label="3" value="3" /> 
-                <Picker.Item key="4" label="4" value="4" />
+                {AVAILABLE_MINUTES.map(value => (
+                    <Picker.Item key={value} label={value} value={value}  />
+                ))}
                 </Picker>
-               {/*} <Picker></Picker> */}
+                <Text style={styles.pickerItem}>minutes</Text>
+                <Picker
+                style={styles.picker}
+                itemStyle={styles.pickerItem}
+                selectedValue="5"
+                onValueChange={itemValue => {
+                    //update the state
+                }}
+                >
+                {AVAILABLE_SECONDS.map(value => (
+                    <Picker.Item key={value} label={value} value={value}  />
+                ))}
+                    
+                </Picker>
+                <Text style={styles.pickerItem}>seconds</Text>
             </View>
         );
     }
