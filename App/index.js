@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     },
     button: {
         borderWidth: 10,
-        borderColor: "#89AAFF",
+        borderColor: "#339966",
         width: screen.width / 2,
         height: screen.width / 2,
         borderRadius: screen.width / 2,
@@ -29,14 +29,14 @@ const styles = StyleSheet.create({
         marginTop: 30
     },
     buttonStop: {
-        borderColor: "#FF851B"
+        borderColor: "#FF0066"
     },
     buttonText: {
         fontSize: 45,
-        color: "#89AAFF"
+        color: "#339966"
     },
     buttonTextStop: {
-        color: "#FF851B"
+        color: "#FF0066"
     },
     timerText: {
         color: '#fff',
